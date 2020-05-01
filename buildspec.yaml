@@ -10,7 +10,7 @@ phases:
     commands:
       - echo Entering the build phase...
       - echo Building started on `date`
-      - aws cloudformation package --template-file cloudformation/websiteIntegration.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file websiteIntegration.yaml
+      # - aws cloudformation package --template-file cloudformation/websiteIntegration.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file websiteIntegration.yaml
       - aws cloudformation package --template-file cloudformation/lambda.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file lambda.yaml
       - aws cloudformation package --template-file cloudformation/restApiResources.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file restApiResources.yaml      
     finally:
@@ -18,7 +18,7 @@ phases:
 artifacts:
   type: zip
   files:
-    - 'websiteIntegration.yaml'
+    # - 'websiteIntegration.yaml'
     - 'lambda.yaml'
-    # - 'restApiResources.yaml'
+    - 'restApiResources.yaml'
   discard-paths: yes
