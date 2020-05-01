@@ -10,23 +10,15 @@ phases:
     commands:
       - echo Entering the build phase...
       - echo Building started on `date`
-      - aws cloudformation package --template-file cloudformation/s3-static-hosting.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file s3-static-hosting.yaml
-      - aws cloudformation package --template-file cloudformation/cognito.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file cognito.yaml
-      # - aws cloudformation package --template-file cloudformation/websiteIntegration.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file websiteIntegration.yaml
-      - aws cloudformation package --template-file cloudformation/dynamo.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file dynamo.yaml
-      # - aws cloudformation package --template-file cloudformation/lambda.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file lambda.yaml
-      - aws cloudformation package --template-file cloudformation/restApi.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file restApi.yaml
-      # - aws cloudformation package --template-file cloudformation/restApiResources.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file restApiResources.yaml      
+      - aws cloudformation package --template-file cloudformation/websiteIntegration.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file websiteIntegration.yaml
+      - aws cloudformation package --template-file cloudformation/lambda.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file lambda.yaml
+      - aws cloudformation package --template-file cloudformation/restApiResources.yaml --s3-bucket $ARTIFACT_S3_BUCKET --output-template-file restApiResources.yaml      
     finally:
       - echo This always runs even if the install command fails
 artifacts:
   type: zip
   files:
-    - 's3-static-hosting.yaml'
-    - 'cognito.yaml'
-    # - 'websiteIntegration.yaml'
-    - 'dynamo.yaml'
-    # - 'lambda.yaml'
-    - 'restApi.yaml'
+    - 'websiteIntegration.yaml'
+    - 'lambda.yaml'
     # - 'restApiResources.yaml'
   discard-paths: yes
